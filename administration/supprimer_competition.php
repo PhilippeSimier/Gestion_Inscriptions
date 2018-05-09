@@ -1,24 +1,24 @@
 <?php
  //------------------------------------------------------------------------
- // ce script supprime une compétition dans la table des compétitions.
- // l'épreuve est identifiée par id_competition méthode GET
+ // ce script supprime une compÃ©tition dans la table des compÃ©titions.
+ // l'Ã©preuve est identifiÃ©e par id_competition mÃ©thode GET
  // version 1.0    2009
  // Endurance72    SIMIER Philippe
  //------------------------------------------------------------------------
  
-// vérification des variables de session pour le temps d'inactivité et de l'adresse IP
+// vÃ©rification des variables de session pour le temps d'inactivitÃ© et de l'adresse IP
 include "authentification/authcheck.php" ;
-// Vérification des droits pour cette page uniquement l'organisateur
-if ($_SESSION['droits']<>'2') { header("Location: ../index.html");};
+// VÃ©rification des droits pour cette page uniquement l'organisateur
+if ($_SESSION['droits']<'2') { header("Location: ../index.html");};
 
 
-// connexion à la base
+// connexion Ã  la base
  require_once('../definitions.inc.php');
  @mysql_connect(SERVEUR,UTILISATEUR,PASSE) or die("<p>Connexion impossible</p>");
  @mysql_select_db(BASE) or die("<p>Echec de selection de la base</p>");
 
- // récupération de la variable id_epreuve transmise par GET
- // et création de la requète SQL
+ // rÃ©cupÃ©ration de la variable id_epreuve transmise par GET
+ // et crÃ©ation de la requÃ¨te SQL
  if ((isset($_GET['id_competition'])) && ($_GET['id_competition'] != "")) {
 
         // on efface l'engagement
