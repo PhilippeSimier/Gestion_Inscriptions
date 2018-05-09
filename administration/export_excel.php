@@ -10,7 +10,7 @@
 // vérification des variables de session pour le temps d'inactivité et de l'adresse IP
 	include "authentification/authcheck.php" ;
 	// Vérification des droits pour cette page tous sauf les exclus
-	if ($_SESSION['droits']<>'2') { 
+	if ($_SESSION['droits']<'2') { 
 		header("Location: index.php");
 	};
 
