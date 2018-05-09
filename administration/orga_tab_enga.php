@@ -304,6 +304,4 @@
     <?php
      @readfile('pied_de_page.html') or die('Erreur fichier');
 	?>
-    </div>
-</body>
-</html>
+    

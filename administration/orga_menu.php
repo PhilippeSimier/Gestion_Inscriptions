@@ -1,14 +1,17 @@
 <?php
 //---------------------------------------------------------------------
 // Menu organisateur
-// Page en accès restreint   uniquement les organisateurs
-// 30 oct 2009 ajout de urlencode
+// Page en accès restreint   uniquement les organisateurs de niveau 2 et plus
+// droit supérieur ou égal à 2
 // Auteur Simier Philippe
 //---------------------------------------------------------------------
 // vérification des variables de session
 	include "authentification/authcheck.php" ;
 	// Vérification des droits pour cette page uniquement organisateur
 	if ($_SESSION['droits']<'2') { 
+		var_dump($_SESSION);
+		exit;
+		
 		header("Location: index.php");
 	};
 
@@ -77,8 +80,12 @@
 			</tr>
 			<tr>
 			    <td bordercolor="#C0C0C0" bgcolor="#D0D0D0"><p style="text-align: center">
-					<a href="/phpmyadmin"><img border="0" src="../images/phpmyadmin.png" width="48" height="48"></a></p>
-					<p style="text-align: center"><b><a href="/phpmyadmin">Gestion base<br />de données</a></b>
+					<?php
+					if ($_SESSION['droits']>'2'){
+						echo'<a href="/phpmyadmin"><img border="0" src="../images/phpmyadmin.png" width="48" height="48"></a></p>';
+						echo'<p style="text-align: center"><b><a href="/phpmyadmin">Gestion base<br />de données</a></b>';
+					}
+					?>
                 </td>
 				
                 <td bordercolor="#C0C0C0" bgcolor="#D0D0D0"><p style="text-align: center"><a href="importer_engages.php" title="Importer"><img border="0" src="../images/xls.png"></a></p>
@@ -102,13 +109,16 @@
             </tr>
             <tr>
 			    <td bordercolor="#C0C0C0" bgcolor="#D0D0D0"><p style="text-align: center">
-					<a href="http://stats.esr72.fr/awstats/awstats.pl?config=www.esr72.fr"><img border="0" src="../images/statistics.png" width="40" height="40"></a></p>
-					<p style="text-align: center"><b><a href="http://stats.esr72.fr/awstats/awstats.pl?config=www.esr72.fr">Statistiques<br /></a></b>
+					
                 </td>
 				
                 <td bordercolor="#C0C0C0" bgcolor="#D0D0D0"><p style="text-align: center">
-					<a href="orga_benevoles.php"><img border="0" src="../images/user.png" width="48" height="48"></a></p>
-					<p style="text-align: center"><b><a href="orga_benevoles.php">Acteurs</a></b>
+					<?php
+					if ($_SESSION['droits']>'2'){
+						echo'<a href="orga_benevoles.php"><img border="0" src="../images/user.png" width="48" height="48"></a></p>';
+						echo'<p style="text-align: center"><b><a href="orga_benevoles.php">Acteurs</a></b>';
+					}
+					?>
                 </td>
 				
                 <td bordercolor="#C0C0C0" bgcolor="#D0D0D0"><p style="text-align: center">
@@ -130,6 +140,3 @@
      @readfile('pied_de_page.html') or die('Erreur fichier');
 	?>
 
-</div>
-</body>
-</html>

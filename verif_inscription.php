@@ -65,7 +65,4 @@
 		<?php
 			 @readfile('administration/pied_de_page.html') or die('Erreur fichier');
 		?>
-		</div>
-	</div>
-</body>
-</html>
+		

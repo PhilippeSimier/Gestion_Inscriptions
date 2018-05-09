@@ -71,12 +71,15 @@
 		case 0:  // Utilisateur révoqué sans droit
 			 header("Location: ../index.php?&erreur=révoqué! ");
 			 break;
-		case 1:  // Administrateur tous les droits (webmestre)
-			 header("Location: ../ad_menu.php");
-			 break;
-		case 2:  // Organisateur)
+		case 1:  // Organisateurs de niveau 1
 			 header("Location: ../orga_menu.php");
 			 break;
+		case 2:  // Organisateurs de niveau 2
+			 header("Location: ../orga_menu.php");
+			 break;
+		case 3:  // Administrateurs de niveau 3
+			 header("Location: ../orga_menu.php");
+			 break;	 
 		
 		default:
 			 header("Location: ../index.php");

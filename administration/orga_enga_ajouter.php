@@ -13,20 +13,22 @@
 	
 	include "authentification/authcheck.php" ;
 	// Vérification des droits pour cette page uniquement organisateurs
-	if ($_SESSION['droits']<>'2') { header("Location: ../index.html");};
+	if ($_SESSION['droits']<'2'){ 
+		header("Location: ../index.html");
+	};
 	require_once('../definitions.inc.php');
 	require_once('utile_sql.php');
-	require_once('../cotisation.php');
+	
 	
 	// connexion à la base de données
     $bdd = new PDO('mysql:host=' . SERVEUR . ';dbname=' . BASE, UTILISATEUR,PASSE);
 
     // lecture de la configuration et définition des constantes ENABLE SAISON DATE DESIGNATION etc
-		$sql = 'SELECT * FROM `cross_route_configuration`';
-		$stmt = $bdd->query($sql);
-		while ($conf = $stmt->fetchObject()){
-			define($conf->conf_key, $conf->conf_value);
-		}
+	$sql = 'SELECT * FROM `cross_route_configuration`';
+	$stmt = $bdd->query($sql);
+	while ($conf = $stmt->fetchObject()){
+		define($conf->conf_key, $conf->conf_value);
+	}
 	// fin de la lecture de la configuration
 	
 	
@@ -279,6 +281,4 @@
 <?php
 		@readfile('pied_de_page.html') or die('Erreur fichier');
 ?>
-</div>
-</body>
-</html>
+

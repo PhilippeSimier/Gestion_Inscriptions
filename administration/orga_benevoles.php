@@ -1,9 +1,9 @@
 <?php
 	// vérification des variables de session pour le temps d'inactivité et de l'adresse IP
 	include "authentification/authcheck.php" ;
-	// Vérification des droits pour cette page uniquement admin
-	if ($_SESSION['droits']<>'2'){ 
-		header("Location: ../index.html");
+	// Vérification des droits pour cette page uniquement admin niveau 3
+	if ($_SESSION['droits']<'3'){ 
+		header("Location: ../index.php");
 	};
 	require_once('../definitions.inc.php');
 	// début du fichier bandeau menu horizontal

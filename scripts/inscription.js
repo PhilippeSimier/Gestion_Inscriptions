@@ -32,33 +32,30 @@
         
 			// cette fonction lance une requète AJAX pour mettre à jour les infos sur l'engagé(e)
 			function licence_ffa(code) {
-			$("#loader").show();                     // affiche le loader
-			$("input").attr("readonly","readonly");  //verouillage des champs input
-			$("#email").attr("readonly","");         // deverouillage du champ email
-			$("#tel").attr("readonly","");           // deverouillage du champ tel
-			$.post("ajax_licence.php", { nolicence: code.value },
-				   function(reponse){
+				$("#loader").show();                     // affiche le loader
+				$.post("ajax_licence.php", { nolicence: code.value },
+				function(reponse){
 					$("#loader").hide();   	//efface le loader
 					retour = eval('('+reponse+')');    // puis mise à jour des champs input
 					if (retour.nom) document.engagement.nom.value=retour.nom; else document.engagement.nom.value="";
 					if (retour.prenom) document.engagement.prenom.value=retour.prenom; else document.engagement.prenom.value="";
 					if (retour.annee) document.engagement.anneenaissance.value=retour.annee; else document.engagement.anneenaissance.value="";
 					if(retour.sexe=="F"){
-					  document.engagement.sexe[1].checked=true;
-					  document.engagement.sexe[0].checked=false;
-					 }
-					if(retour.sexe=="M"){
-					  document.engagement.sexe[0].checked=true;
-					  document.engagement.sexe[1].checked=false;
+						document.engagement.sexe[1].checked=true;
+						document.engagement.sexe[0].checked=false;
 					}
-					if(retour.noclub) document.engagement.noclub.value=retour.noclub; else document.engagement.noclub.value="";
+					if(retour.sexe=="M"){
+						document.engagement.sexe[0].checked=true;
+						document.engagement.sexe[1].checked=false;
+					}
+					if(retour.noclub) 
+						document.engagement.noclub.value=retour.noclub; else document.engagement.noclub.value="";
 
-					if (!retour.nom)    $("input").attr("readonly","");  // si pas de nom déverouillage des champs input
 					if (retour.nom)  $("input").focus(function(){
 						$(this).removeClass();
-				$(this).addClass("normal");
-					 });
-				   }
+						$(this).addClass("normal");
+					});
+				}
 				);
 			}
 

@@ -52,7 +52,10 @@ require_once('administration/utile_sql.php');
 			exit;
 			};
 	}
-	if (EN_FFA==FALSE) { header("Location: close.php");};
+	if (EN_FFA==FALSE) { 
+		header("Location: close.php");
+		exit;
+		};
 
 //--------------------si des données  sont reçues---------------------------------------------------------
 if( !empty($_POST['envoyer'])){
@@ -129,9 +132,7 @@ if( !empty($_POST['envoyer'])){
               GetSQLValueString($_POST['competition'], "text")
         );
 
-		//$reponse = mysql_query($sql);
 		$stmt = $bdd->query($sql);
-		//$competition = mysql_fetch_object ($reponse);
 		$competition = $stmt->fetchObject();
 
     if ($competition->licence == "COMP") {
@@ -274,8 +275,8 @@ $pdo = null;
 ?>
 			<script type="text/javascript"><!--
 				alertNeeded();
-			//--></script>
-
+			//-->
+			</script>
 			
 			<div id="contenu" style="width:90%;" >
 				<h2>Inscription en ligne <?php echo SAISON ?></h2>
@@ -286,43 +287,43 @@ $pdo = null;
 
 					<form method="post" action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" name="engagement" >
 
-						  <table  border="0" cellpadding="2" cellspacing="2">
+						<table  border="0" cellpadding="2" cellspacing="2">
 							<tbody>
-							  <tr>					
-								<td >
-									<label for="nolicence">Numéro de licence :</label>
-									<input type="text" class="normal" name="nolicence"  maxlength="10" onChange="licence_ffa(this)" value="<?php if (isset($_POST['nolicence'])) echo $_POST['nolicence']; ?>"/>
-								</td>
-								
-								<td>
-									<label for="noclub">Numéro de club :</label>
-									<input class="normal" name="noclub" onKeyPress="return pasCar(event)" maxlength="6"<?php if (isset($_POST['noclub'])) echo 'value="'.$_POST['noclub'].'" readonly="readonly"'; else echo ' value="" ';?>/>
-								</td>
-							  </tr>
+								<tr>					
+									<td >
+										<label for="nolicence">Numéro de licence :</label>
+										<input type="text" class="normal" name="nolicence"  maxlength="10" onChange="licence_ffa(this)" value="<?php if (isset($_POST['nolicence'])) echo $_POST['nolicence']; ?>"/>
+									</td>
+									
+									<td>
+										<label for="noclub">Numéro de club :</label>
+										<input class="normal" name="noclub" onKeyPress="return pasCar(event)" maxlength="6"<?php if (isset($_POST['noclub'])) echo 'value="'.$_POST['noclub'].'" readonly="readonly"'; else echo ' value="" ';?>/>
+									</td>
+								</tr>
 							  
-							  <tr> 
-								<td>
-									<label for="nom">Nom :</label>
-									<input type="text" class="normal" name="nom" onKeyPress="return pasNum(event)" onChange="majuscule(this)"  maxlength="20" <?php if (isset($_POST['nom'])) echo 'value="'.$_POST['nom'].'" readonly="readonly"'; ?> required/>
-								</td>
-								<td>
-									<label for="prenom">Prénom :</label>
-									<input type="text" class="normal" name="prenom" onKeyPress="return pasNum(event)" onChange="majuscule(this)" maxlength="20" <?php if (isset($_POST['prenom'])) echo 'value="'.$_POST['prenom'].'" readonly="readonly"'; ?> required/>
-								</td>
-							  </tr>
-							  <tr>
-								<td>
-									<label for="anneenaissance">Année de naissance :</label>
-									<input type="number" min="1920" class="normal" name="anneenaissance" size="4" maxlength="4" onKeyPress="return pasCar(event)" <?php if (isset($_POST['anneenaissance'])) echo 'value="'.$_POST['anneenaissance'].'" readonly="readonly"'; ?> required/>
-								</td>
-								<td>
-									<label for="sexe">Sexe :</label>
-									<input type="radio"  name="sexe"  value="M" checked="checked" />Masculin
-									<input type="radio" <?php if (isset($_POST['sexe']) && $_POST['sexe']=='F')echo 'checked="checked"' ?> name="sexe" value="F"   />Féminin
-								</td>
-							  </tr>
+								<tr> 
+									<td>
+										<label for="nom">Nom :</label>
+										<input type="text" class="normal" name="nom" onKeyPress="return pasNum(event)" onChange="majuscule(this)"  maxlength="20" <?php if (isset($_POST['nom'])) echo 'value="'.$_POST['nom'].'" readonly="readonly"'; ?> required/>
+									</td>
+									<td>
+										<label for="prenom">Prénom :</label>
+										<input type="text" class="normal" name="prenom" onKeyPress="return pasNum(event)" onChange="majuscule(this)" maxlength="20" <?php if (isset($_POST['prenom'])) echo 'value="'.$_POST['prenom'].'" readonly="readonly"'; ?> required/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="anneenaissance">Année de naissance :</label>
+										<input type="number" min="1920" class="normal" name="anneenaissance" size="4" maxlength="4" onKeyPress="return pasCar(event)" <?php if (isset($_POST['anneenaissance'])) echo 'value="'.$_POST['anneenaissance'].'" readonly="readonly"'; ?> required/>
+									</td>
+									<td>
+										<label for="sexe">Sexe :</label>
+										<input type="radio"  name="sexe"  value="M" checked="checked" />Masculin
+										<input type="radio" <?php if (isset($_POST['sexe']) && $_POST['sexe']=='F')echo 'checked="checked"' ?> name="sexe" value="F"   />Féminin
+									</td>
+								</tr>
 							  
-							  <tr>
+								<tr>
 									<td>
 										<label for="email">Email :</label>
 										<input type="email" class="normal" name="email" id="email" maxlength="50" <?php if (isset($_POST['email'])) echo 'value="'.$_POST['email'].'"'; ?> required/>
@@ -331,10 +332,9 @@ $pdo = null;
 										<label for="tel">Tel :</label>
 										<input type="tel" class="normal" name="tel" id="tel" maxlength="10"  <?php if (isset($_POST['tel'])) echo 'value="'.$_POST['tel'].'"'; ?> required/>
 									</td>
-							  </tr>
+								</tr>
 							  
-							  <tr>
-									
+								<tr>	
 									<td>
 										<label for="competition">Vous souhaitez vous inscrire : </label>
 										<?php 
@@ -378,70 +378,62 @@ $pdo = null;
 										<label for="id_epreuve">choisissez : </label>
 										<?php 
 											echo '<select name="id_epreuve">';
-											if ($_GET['competition'] =='' && $_POST['competition'] =='')
+											if ( !isset($_GET['competition']) && !isset($_POST['competition']))
 											{
 											  echo '<option selected="selected" value="">Choisissez l\'option</option>';
 											}
 											else
 											{
 											  // connexion à la base 
-															$bdd = new PDO('mysql:host=' . SERVEUR . ';dbname=' . BASE, UTILISATEUR,PASSE);
-															// Lecture de la table cross_route_epreuve pour obtenir les désignations et codes des epreuves
-															if ($_GET['competition'] !=''){
-															$sql = "SELECT * FROM cross_route_epreuve WHERE `competition`='".$_GET['competition']."'";}
-															if ($_POST['competition'] !=''){
-															$sql = "SELECT * FROM cross_route_epreuve WHERE `competition`='".$_POST['competition']."'";}
-															//$reponse = mysql_query($sql) or die(mysql_error());
-															$stmt = $bdd->query($sql);
-															while ($epreuve = $stmt->fetchObject() ){
-																echo '<option value="'.$epreuve->id_epreuve.'"';
-																echo $_POST['id_epreuve']; //
-																echo $epreuve->code;  //
-																
-																if ($_POST['id_epreuve']==$epreuve->id_epreuve) echo ' selected="selected" ';
-																	echo '>'.$epreuve->designation.'</option>';
-																}
+												$bdd = new PDO('mysql:host=' . SERVEUR . ';dbname=' . BASE, UTILISATEUR,PASSE);
+												// Lecture de la table cross_route_epreuve pour obtenir les désignations et codes des epreuves
+												if (isset($_GET['competition'])){
+													$sql = "SELECT * FROM cross_route_epreuve WHERE `competition`='".$_GET['competition']."'";}
+												if (isset($_POST['competition'])){
+													$sql = "SELECT * FROM cross_route_epreuve WHERE `competition`='".$_POST['competition']."'";}
 															
-															// fin de la lecture des epreuves	
+												$stmt = $bdd->query($sql);
+												while ($epreuve = $stmt->fetchObject() ){
+													echo '<option value="'.$epreuve->id_epreuve.'"';
+													echo $_POST['id_epreuve']; //
+													echo $epreuve->code;  //
+																
+													if ($_POST['id_epreuve']==$epreuve->id_epreuve) echo ' selected="selected" ';
+														echo '>'.$epreuve->designation.'</option>';
+													}
+															
+													// fin de la lecture des epreuves	
 											}
 											echo '</select>';
 										?>	
 									</td>
-							 </tr>
-
-
-							<tr>
-
-							  <td colspan="2">
-									<br />Pour pouvoir valider votre inscription, vous devez accepter le règlement suivant :
-									<br />En cochant la case, vous reconnaissez avoir lu et accepté le règlement de cette épreuve
-							  </td>
-							</tr>
-							<tr>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<br />Pour pouvoir valider votre inscription, vous devez accepter le règlement suivant :
+										<br />En cochant la case, vous reconnaissez avoir lu et accepté le règlement de cette épreuve
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="checkbox" name="reglement" > <b>Règlement de la compétition</b>
+										<a href="reglement.php" target="_blank"> (réglement)</a>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" style=" width:28%;"><input value="Valider" name="envoyer" type="submit" onclick="alertNotNeeded()"/>
+									</td>
 							  
-							  <td colspan="2">
-							  <input type="checkbox" name="reglement" > <b>Règlement de la compétition</b>
-							  <a href="reglement.php" target="_blank"> (réglement)</a>
-							  </td>
-							</tr>
-							 <tr>
-							  
-							  <td colspan="2" style=" width:28%;"><input value="Valider" name="envoyer" type="submit" onclick="alertNotNeeded()"/>
-							  </td>
-							  
-							</tr>
-
-					  </tbody>
-					</table>
-					<br />
+								</tr>
+							</tbody>
+						</table>
+					
 					</form>
-					<br />
+					
 				</div>
 			</div>
-		</div>
+		
 		<?php
 			 @readfile('administration/pied_de_page.html') or die('Erreur fichier');
 		?>
-		</div>
-	</body>
-</html>
+		

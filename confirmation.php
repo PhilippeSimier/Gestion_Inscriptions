@@ -29,19 +29,19 @@
 			<p>Merci pour votre inscription</p>
 			<?php 
 				if  ($_GET['cas']=="0") {
-				echo "<p>Vous êtes non licencié FFA, votre inscription ne sera définitivement prise en compte
+					echo "<p>Vous êtes non licencié FFA, votre inscription ne sera définitivement prise en compte
 					que lorsque vous aurez fait parvenir au secrétariat<b> votre certificat médical de non contre-indication à la pratique de la course à pied en
 					compétition (mention obligatoire)</b>. Les licences sportives hors FFA ne remplacent pas le certificat médical.</p>";
 				}
 
 				if  ($_GET['cas']=="1") {
-				   echo ""; 
+				   echo "<p>Vous êtes licencié FFA </p>"; 
 				}
 				
 				if  ($_GET['cas']=="2") {
-				echo "<p>Vous venez d'inscrire votre équipe <b>".$_GET['nomequipe']."</b> au challenge entreprises/militaires, si vous êtes non-licenciés FFA, votre inscription ne sera définitivement prise en compte
-				que lorsque vous aurez fait parvenir au secrétariat les certificats médicaux de non contre-indication à la pratique de la course à pied en
-				compétition (mention obligatoire). Les licences sportives hors FFA ne remplacent pas le certificat médical.</p>";
+					echo "<p>Vous venez d'inscrire votre équipe <b>".$_GET['nomequipe']."</b> au challenge entreprises/militaires, si vous êtes non-licenciés FFA, votre inscription ne sera définitivement prise en compte
+					que lorsque vous aurez fait parvenir au secrétariat les certificats médicaux de non contre-indication à la pratique de la course à pied en
+					compétition (mention obligatoire). Les licences sportives hors FFA ne remplacent pas le certificat médical.</p>";
 				}
 				
 				if (!isset($_GET['gratuit'])) { 
@@ -71,6 +71,10 @@
 				<p>Nous vous rappelons que l'adresse postale est la suivante :<br /></p><div style='text-align: center;'><span style='font-weight: bold;'>
 				Lycée Touchard</span><br /> Place Washington <br />72017 le Mans</div>";
 				}
+				else{
+				 echo "<p> L'inscription est gratuite </p>";	
+				}	
+					
 			?>
 
 			<p>Vous pouvez consulter  la prise en compte de votre inscription : <a href="verif_inscription.php">vérification</a></p> 
@@ -86,6 +90,4 @@
 			@readfile('administration/pied_de_page.html') or die('Erreur fichier');
 		?>
 		
-	</div>
-</body>
-</html>
+	

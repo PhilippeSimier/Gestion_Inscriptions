@@ -40,7 +40,7 @@ unset($_SESSION['droits']);
 						</tr>
 						<tr>
 							<td>
-								<label for="" "passe"="">Mot de passe :</label>
+								<label for="password">Mot de passe :</label>
 								<input type="password" class="normal" name="passe" size="30" onchange="alertNeeded()" required="">
 							</td>
 						</tr>
@@ -54,9 +54,7 @@ unset($_SESSION['droits']);
         </div>
         </center>
     </div>
-	 <?php
+<?php
      @readfile('pied_de_page.html') or die('Erreur fichier');
-	 ?>
-</div>
-</body>
-</html>
+?>
+
