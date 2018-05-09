@@ -5,7 +5,7 @@
 	// page autoréferente  protégée
 	include "authentification/authcheck.php" ;
 	// Vérification des droits pour cette page uniquement organisateurs
-	if ($_SESSION['droits']<>'2') { 
+	if ($_SESSION['droits']<'2') { 
 		header("Location: index.php");
 	};
 
