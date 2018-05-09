@@ -1,11 +1,11 @@
 <?php
 //-----------------------------------------------------------------------
 // ce script supprime un acteur
-// page protégée
+// page protÃ©gÃ©e
 //-----------------------------------------------------------------------
 include "authentification/authcheck.php" ;
-// Vérification des droits pour cette page uniquement acteur
-if ($_SESSION['droits']<>'2') { header("Location: ../index.php");};
+// VÃ©rification des droits pour cette page uniquement acteur
+if ($_SESSION['droits']<'3') { header("Location: ../index.php");};
 require_once('../definitions.inc.php');
 require_once('utile_sql.php');
 
