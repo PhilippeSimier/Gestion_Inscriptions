@@ -9,7 +9,7 @@
 
 	include "authentification/authcheck.php" ;
 	// Vérification des droits pour cette page uniquement organisateur
-	if ($_SESSION['droits']<>'2'){ 
+	if ($_SESSION['droits']<'2'){ 
 		header("Location: index.php");
 	};
 
