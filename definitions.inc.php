@@ -4,7 +4,7 @@
   // pour la connexion aux bases MySQL du site gestion des compétitions sportives
 
   define ("UTILISATEUR","philippe");
-  define ("PASSE","toto");
+  define ("PASSE","liberte");
   define ("SERVEUR","127.0.0.1");
 
 // base de données pour les organisations ESR72
