@@ -1,14 +1,14 @@
 <?php
 //--------------------------------------------------------------------
-// Ce script permet de modifier la validation d'une compétition
-// Compétition identifiée par son id transmis par la méthose GET
+// Ce script permet de modifier la validation d'une compÃ©tition
+// CompÃ©tition identifiÃ©e par son id transmis par la mÃ©those GET
 //
-// page protégée
+// page protÃ©gÃ©e
 //--------------------------------------------------------------------
 
 	include "authentification/authcheck.php" ;
-	// Vérification des droits pour cette page uniquement organisateur
-	if ($_SESSION['droits']<>'2') { 
+	// VÃ©rification des droits pour cette page uniquement organisateur
+	if ($_SESSION['droits']<'2') { 
 		header("Location: index.php");
 	};
 
@@ -16,7 +16,7 @@
 	require_once('utile_sql.php');
 
 
-	// connexion à la base de données
+	// connexion Ã  la base de donnÃ©es
 	$bdd = new PDO('mysql:host=' . SERVEUR . ';dbname=' . BASE, UTILISATEUR,PASSE);
 
 	if (isset($_GET['id']) && isset($_GET['val'])){
