@@ -14,7 +14,7 @@
 	require_once('utile_sql.php');
 
 	// Vérification des droits pour cette page uniquement organisateurs
-	if ($_SESSION['droits']<>'2') { header("Location: index.php");};
+	if ($_SESSION['droits']<'2') { header("Location: index.php");};
 	require_once('../definitions.inc.php');
 	$bdd = new PDO('mysql:host=' . SERVEUR . ';dbname=' . BASE, UTILISATEUR,PASSE);
 
