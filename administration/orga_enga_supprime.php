@@ -5,7 +5,7 @@
 // vérification des variables de session pour le temps d'inactivité et de l'adresse IP
 	include "authentification/authcheck.php" ;
 	// Vérification des droits pour cette page uniquement l'organisateur
-	if ($_SESSION['droits']<>'2') { header("Location: ../index.html");};
+	if ($_SESSION['droits']<'2') { header("Location: ../index.html");};
 
 
 		// connexion à la base
