@@ -3,8 +3,8 @@
 // table cross_route_configuration dans la base
 
 	include "authentification/authcheck.php" ;
-	// Vérification des droits pour cette page uniquement organisateur
-	if ($_SESSION['droits'] <> '2'){ 
+	// Vérification des droits pour cette page uniquement organisateur de niveau 2 et plus
+	if ($_SESSION['droits'] < '2'){ 
 		header("Location: index.php");
 	};
 
