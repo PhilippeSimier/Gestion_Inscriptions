@@ -26,178 +26,152 @@
 		$sql = "SELECT * FROM `competition` WHERE `id`='".$_GET['competition']."'";
 		$stmt = $bdd->query($sql);
 		$competition = $stmt->fetchObject();
+	// début de la page bandeau menu horizontal
+		@readfile('en_tete.html') or die('Erreur fichier');	
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-	<head>
-		<title>Liste des engagé(e)s</title>
-		<link rel=stylesheet href='../css/inscriptions.css' TYPE='text/css'>
-		<style type="text/css">
-		<!--
-		div#rechercher {
-			position: absolute;
-			top: 12px;
-			left: 120px;
-			width: 155px;
-		}
-		form {
-			background-color:#D0D0D0;
-			border: 1px solid #999998;
-			height: 28px;
-		}
+<style type="text/css">
+	<!--
+	div#rechercher {
+        position: absolute;
+        top: 12px;
+        left: 120px;
+        width: 155px;
+	}
+	form {
+       background-color:#D0D0D0;
+       border: 1px solid #999998;
+       height: 28px;
+	}
 
-		form input {
-			background-color:#D0D0D0;
-			color: #000;
-			font-size: 18px;
-			border: 0px solid #ECE9D8;
-			padding: 0px;
-			padding-left: 5px;
-			height: 25px;
-			width: 117px;
-			cursor: text;
-		}
+	form input {
+		background-color:#D0D0D0;
+		color: #000;
+		font-size: 18px;
+		border: 0px solid #ECE9D8;
+		padding: 0px;
+		padding-left: 5px;
+		height: 25px;
+		width: 117px;
+		cursor: text;
+    }
 
-		.bouton {
-			background-image: url(../images/loupe.png);
-			background-color:#D0D0D0;
-			color: #D0D0D0;
-			border: 0px solid #ECE9D8;
-			padding: 0px;
-			height: 23px;
-			width: 24px;
-			cursor: pointer;
-		}
+	.bouton {
+		background-image: url(../images/loupe.png);
+		background-color:#D0D0D0;
+		color: #D0D0D0;
+		border: 0px solid #ECE9D8;
+		padding: 0px;
+		height: 23px;
+		width: 24px;
+		cursor: pointer;
+    }
 
-		div#outils {
-			position: relative;
-			height: 60px;
-		}
 
-		table#tableau {
-			clear: both;
-			width: 99%;
-			margin-left:5px;
-			border-collapse: collapse;
-			border-top: 5px solid #D0D0D0;
-			border-bottom: 5px solid #D0D0D0;
-			border-left:1px solid #D0D0D0;
-			border-right:1px solid #D0D0D0;
-		}
-		
-		table#tableau td {
-			border-top: 1px solid #D0F0F0;
-			padding: 4px;
-		}
+	div#outils {
+        position: relative;
+        height: 60px;
 
-		tr.impaire {
-			 background-color: #F0F0F0;
-		}
+	}
 
-		table#tableau th {
-			background-color: #D0D0D0;
-			color: #000000;
-			padding: 4px;
-		}
+	table#tableau {
+        clear: both;
+        width: 99%;
+        margin-left:5px;
+        border-collapse: collapse;
+        border-top: 5px solid #D0D0D0;
+        border-bottom: 5px solid #D0D0D0;
+        border-left:1px solid #D0D0D0;
+        border-right:1px solid #D0D0D0;
+	}
+	
+	table#tableau td {
+        border-top: 1px solid #D0F0F0;
+        padding: 4px;
 
-		#multi_page {
-			position: absolute;
-			top: 12px;
-			left: 380px;
-		}
+	}
 
-		#multi_page  a {
-			border: 1px solid #999998;
-			padding: 5px;
-			font-size: 14px;
-			font-family:"Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
-			line-height: 31px;
-		}
+	tr.impaire {
+        background-color: #F0F0F0;
+	}
 
-		#multi_page  a:hover {
-			background-color: #7074b3;
-		}
+	table#tableau th {
+        background-color: #D0D0D0;
+        color: #000000;
+        padding: 4px;
 
-		#multi_page .actuel {
-			border: 1px solid #5d668c;
-			padding: 5px;
-			font-size: 14px;
-			background-color: #384478;
-			color: #FFF;
-		}
-		
-		a.tooltip {
-			cursor: help;
-			text-decoration:none;
-		}
-		
-		a.tooltip em {
-			display:none;
-		}
-		
-		a.tooltip:hover {
-			border: 0; 
-			position: relative; 
-			z-index: 500; 
-			text-decoration:none;
-		}
-		
-		a.tooltip:hover em {
-			font-style: normal; 
-			display: block; 
-			position: absolute; 
-			top: 20px; 
-			left: -10px; 
-			padding: 5px; 
-			color: #000; 
-			border: 1px solid #bbb; 
-			background: #ffc; 
-			width:170px;
-		}
-		
-		a.tooltip:hover em span {
-			position: absolute; 
-			top: -7px; 
-			left: 15px;
-			height: 7px; 
-			width: 11px; 
-			background: transparent url(images/image-infobulle.png);
-			margin:0; 
-			padding: 0;
-			border: 0;
-		}
+	}
 
-		-->
-		</style>
+	#multi_page {
+		position: absolute;
+        top: 12px;
+        left: 380px;
+	}
 
-		<script language="JavaScript" type="text/JavaScript">
-			<!--
-			function GoToURL() { //v3.0
-				var i, args=GoToURL.arguments; document.MM_returnValue = false;
-				for (i=0; i<(args.length-1); i+=2) 
-					eval(args[i]+".location='"+args[i+1]+"'");
-			}
-			function GoToURL_conf() { //v3.0
-				var i, args=GoToURL_conf.arguments;
-				document.MM_returnValue = false;
-				Confirmation = confirm("Confirmez-vous la suppression de "+args[2]);
-				if (Confirmation){
-					for (i=0; i<(args.length-1); i+=2) 
-						eval(args[i]+".location='"+args[i+1]+"'");
-				}
-			}
+	#multi_page  a {
+		border: 1px solid #999998;
+		padding: 5px;
+		font-size: 14px;
+		font-family:"Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+        line-height: 31px;
+	}
 
-			//-->
-		</script>
-	</head>
+	#multi_page  a:hover {
+		background-color: #7074b3;
+	}
 
-<body topmargin="0" leftmargin="0">
-	<div id="page">
-		<div id="bandeau_flash" style="width: 1098px; height: 336px;">
-			<a href="../../"><img style="width: 1098px; height: 336px; border: 0px;" title="Retour accueil" src="../images/bandeau_trail.jpg" /><br /></a>
-		</div>
+	#multi_page .actuel {
+        border: 1px solid #5d668c;
+		padding: 5px;
+		font-size: 14px;
+		background-color: #384478;
+		color: #FFF;
+	}
+	
+	a.tooltip {
+		cursor: help;
+		text-decoration:none;
+	}
+	
+	a.tooltip em {
+		display:none;
+	}
+	
+	a.tooltip:hover {
+		border: 0; 
+		position: relative; 
+		z-index: 500; 
+		text-decoration:none;
+	}
+	
+	a.tooltip:hover em {
+		font-style: normal; 
+		display: block; 
+		position: absolute; 
+		top: 20px; 
+		left: -10px; 
+		padding: 5px; 
+		color: #000; 
+		border: 1px solid #bbb; 
+		background: #ffc; 
+		width:170px;
+	}
+	
+	a.tooltip:hover em span {
+		position: absolute; 
+		top: -7px; 
+		left: 15px;
+		height: 7px; 
+		width: 11px; 
+		background: transparent url(images/image-infobulle.png);
+		margin:0; 
+		padding: 0;
+		border: 0;
+	}
 
-		<div id="contenu" style="width: 1090px; min-height:500px; margin-left: 4px; margin-right: 4px;">
+	-->
+	</style>
+
+		<div id="contenu" style="width:96%">
 			<h2>Liste des <I>Engagé(e)s <?php echo $competition->nom; ?></I></h2>
 			<div id="outils">
 				<a href="orga_menu.php"><img src="../images/fleche_retour.png" title="Retour" border="0" width="44" height="41"></a>

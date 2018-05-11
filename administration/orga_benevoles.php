@@ -177,7 +177,7 @@
 
 
 
-    <div id="contenu" style="width: 1024px; min-height:500px;">
+    <div id="contenu" style=" min-height:400px;">
         <h2>Liste des acteurs</h2>
         <div id="outils">
             <a href="orga_menu.php"><img src="../images/fleche_retour.png" title="Retour" border="0" width="44" height="41"></a>

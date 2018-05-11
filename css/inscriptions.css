@@ -7,9 +7,9 @@
  /* Definition du corps de la page fond vert clair                   */
 
 body {
-    background-image: url(/Gestion_Inscriptions/images/fond.gif);
-    Background-Color: #9F9;
-    margin: 8px;
+/*    background-image: url(/Gestion_Inscriptions/images/fond.gif);   */
+/*    Background-Color: #9F9; */
+/*    margin: 8px;   */
 }
 
 
@@ -25,43 +25,18 @@ body {
 		text-align: left;
  }
 
-/* menu horizontal  fond vert dégradé*/
-#nav-horizon {
-        background-image: url(../images/menu_01.jpg);
-        background-color: #000;
-        height: 19px;
-        vertical-align: middle;
 
-        position: relative;
-        z-index:1;
 
-        color:#FFFFFF;
-        font-size:12px;
-        font-style:normal;
-        height:19px;
-        margin:2px 5px;
-        padding:2px;
-}
-
-/* le contenu dans une colonne à  droite du menu */
+/* le contenu  */
 #contenu {
         
-    float: left;
-    margin-left: 40px;
-    margin-right: 80px;
-    margin-top: 10px;
-    min-height: 500px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 5px;
+    min-height: 400px;
  }
 
-/* le menu vertical  est à gauche */
-#menu {
-	
-	float: left;
-	width: 250px;
-	height: 500px;
-	padding: 0px;
-	margin-top: 20px;
-}
+
 
 
 #pied {
@@ -105,48 +80,7 @@ span.vert {
    font-size: 13pt;
    }
 
-/* propriÃ©tÃ©s des liens */
-a {
-  color: #000;
-}
 
-
-
-/* Definition des titres 2 couleur orange */
-/* police Bodoni car elle comporte un empattement fin */
-
-h2
-{
-color: #18417F;
-font-family: "Verdana";
-Font-Size: 16pt;
-font-weight: bold;
-letter-spacing: 1px;
-margin-top: 18pt;
-margin-left: 15px;
-}
-
-h3
-{
-font-family: "verdana";
-font-size: 14pt;
-color: #18417F;
-font-weight: bold;
-margin-left: 15px;
-
-
-}
-
-/* Definition des paragraphes  couleur blanc */
-
-p
-{
-Color: #000;
-font-family:"Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
-font-size: 12pt;
-Text-Align: justify;
-margin-left: 50px;
-}
 
 /* Definition de la classe paragraphe pour les notes de bas de page */
 p.note       {
@@ -268,20 +202,23 @@ form.chercher input {
      }
 
 div#auth {
-         background-color:#E0E0E0;
-         border:1px solid #999999;
-         padding:10px;
-         width:500px;
+    background-color:#E0E0E0;
+    padding:10px;
+    max-width: 400px;
+	margin: 0 auto;
+		 
 }
 
 .focus { /***pour les formulaires à l'utilisation fond bleu clair***/
 	background: #90E1FF;
 	border:1px solid #999999;
+	border-radius: 5px;
 	color: black;
 }
 .normal {	/***pour les formulaires retour à l'état normal après l'utilisation ***/
 	background: white;
 	border:1px solid #999999;
+	border-radius: 5px;
 	color: black;
 
 }

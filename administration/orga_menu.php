@@ -40,11 +40,11 @@
 	if (!is_readable('en_tete.html'))  die ("fichier non accessible");
 	@readfile('en_tete.html') or die('Erreur fichier');
 ?>
-    <div id="contenu" style="width: 1024px; min-height:500px;">
+    <div id="contenu" style="min-height:500px;">
 
         <h2>Gestion des inscriptions : <?php echo SAISON ; echo " pour : " . $_SESSION['identite']?></h2>
         <center>
-        <table style="text-align: center" border="0" width="800px" cellpadding="2" bordercolor="#808080" cellspacing="6">
+        <table style="width:100%; margin: 0px;">
 			<tr>
 				<td bordercolor="#FFFFFF" bgcolor="#FFFFFF" colspan="4">
 

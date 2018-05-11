@@ -18,11 +18,9 @@ unset($_SESSION['droits']);
     <script language="javascript" type="text/javascript" src="./authentification/login.js"></script>
     
 
-    <div id="contenu" style="width: 1024px; min-height:500px;">
-
+    <div id="contenu" style="width: 95%">
         <h2>Authentification :</h2>
-        <center>
-		<div id="auth">
+		<div id="auth" class="jumbotron text-center">
 			<p>Bienvenue! pour continuer le serveur<br /><span style="font-weight:bold;"> <?php echo $_SERVER["SERVER_NAME"]; ?></span><br /></p>
 			  <?php if (isset($_GET["erreur"])) echo '<p style="color: #ff0000;">'.$_GET["erreur"].'</p>';
 					  else echo '<p>Requiert un identifiant et un mot de passe.</p>';
@@ -30,29 +28,19 @@ unset($_SESSION['droits']);
 			
 			<form method="POST" action="./authentification/auth.php" onSubmit="javascript:submit_pass();" name="form2" id="form2">
 				<input type='hidden' name='md5' />
-				<table style="border-spacing: 20px;">
-					<tbody>
-						<tr>
-							<td>
-								<label for="login">Identifiant :</label>
-								<input type="text" class="normal" name="login" size="30" onchange="alertNeeded()" required="">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label for="password">Mot de passe :</label>
-								<input type="password" class="normal" name="passe" size="30" onchange="alertNeeded()" required="">
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><input type="submit" value="Valider" name="B1" onclick="alertNotNeeded()"></td>
-						</tr>
-					</tbody>
-				</table>
+					<div class="form-group">
+						<label for="login">Identifiant :</label>
+						<input type="text" class="normal" name="login" size="20" onchange="alertNeeded()" required="">
+					</div>	
+					<div class="form-group">
+						<label for="password">Mot de passe :</label>
+						<input type="password" class="normal" name="passe" size="20" onchange="alertNeeded()" required="">
+					</div>
+					<button type="submit" class="btn btn-primary" value="Valider" name="B1" onclick="alertNotNeeded()" > Valider</button>
+							
 			</form>
         </div>
-        </center>
+        
     </div>
 <?php
      @readfile('pied_de_page.html') or die('Erreur fichier');

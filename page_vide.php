@@ -4,7 +4,7 @@
 		@readfile('administration/en_tete.html') or die('Erreur fichier');
 ?>
 
-   	<div id="contenu" style="width: 1024px; min-height:500px;">
+   	<div id="contenu" style="min-height:500px;">
 
 		<h2>Page vide à compléter</h2>
         

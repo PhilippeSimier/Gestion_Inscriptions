@@ -78,11 +78,11 @@
             }
         }
 	</script>
-    <div id="contenu" style="width: 1024px; min-height:500px;">
+    <div id="contenu" style="min-height:500px;">
         <h2><a href="orga_menu.php"><img src="../images/fleche_retour.png" title="Retour" border="0" width="44" height="41"></a>
          Liste des compétitions : <?php echo SAISON ; echo " pour : " . $_SESSION['identite']?> </h2>
         <div>
-			<table id="tableau">
+			<table id="tableau" style="width:100%; margin: 0px;">
                 <tr><th>Libellé</th>
                     <th>Lieu</th>
                     <th>Organisateur</th>

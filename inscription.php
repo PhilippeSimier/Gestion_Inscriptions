@@ -159,7 +159,7 @@ if( !empty($_POST['envoyer'])){
 
  if (!$erreur){
       // voir module cotisation.php pour les prestations complémentaires et régles
-      $cotisation = prix_cotisation($bdd, $_POST['noclub'],$_POST['nomcourse'],$_POST['competition'],0,0);
+    $cotisation = prix_cotisation($bdd, $_POST['id_epreuve']);
 
     if ($cotisation==0) $gratuit='oui'; else $gratuit='non';
     $commentaire = $cotisation;
