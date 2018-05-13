@@ -2,17 +2,17 @@
      // modifié par philippe SIMIER pour éviter de reporter les Notices
      // adapté pour pouvoir fonctionner avec xinha 
      // philippe.simier@ac_nantes.fr
-     // ce programme scanne un répertoire pour créer un tableau des fichiers présents
+     // ce programme scanne un rÃ©pertoire pour crÃ©er un tableau des fichiers prÃ©sents
      // le tableau est au format Jison.
 
      error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 
 
-    $include      = '/\.(shtml|html|htm|jpg|gif|txt|doc|pdf|rtf)$/';    //les extensions à prendre en compte
+    $include      = '/\.(shtml|html|htm|jpg|gif|txt|doc|pdf|rtf)$/';    //les extensions Ã  prendre en compte
     $exclude      = '';
     $dirinclude   = '';
-    $direxclude   = '/(^|\/)[._]|xinha/'; // les répertoires à exclure,  l'arborescence xinha par default
+    $direxclude   = '/(^|\/)[._]|xinha/'; // les rÃ©pertoires Ã  exclure,  l'arborescence xinha par default
 
     $hash = '';
     foreach(explode(',', 'dir,include,exclude,dirinclude,direxclude') as $k)

