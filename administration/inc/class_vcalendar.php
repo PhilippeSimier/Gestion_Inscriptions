@@ -1,30 +1,30 @@
 <?php
 /***************************************************************************
 
-PHP vCalendar class v2.0
+	PHP vCalendar class v2.0
 
-Cette classe permet de créer des fichiers textes au format vCalendar v1.0 ou 2.0
-pour transmettre des évènements vers un agenda
+Cette classe permet de crÃ©er des fichiers textes au format vCalendar v1.0 ou 2.0
+pour transmettre des Ã©vÃ¨nements vers un agenda
 Auteur SIMIER Philippe philaure@wanadoo.fr
 
 si le constructeur recoit pour argument encodage le valeur quoted alors version 1.0
 avec l'encodage UTF8 se sera la version 2.0
-Un composant "VEVENT" offre un panel de propriétés qui décrivent un évènement comme représentant une quantité de temps planifiée
-sur un calendrier. En temps normal, un évènement valide rendra ce temps occupé, mais il est possible de le configurer 
-en mode "Transparent", pour changer cette interprétation.
+Un composant "VEVENT" offre un panel de propriÃ©tÃ©s qui dÃ©crivent un Ã©vÃ¨nement comme reprÃ©sentant une quantitÃ© de temps planifiÃ©e
+sur un calendrier. En temps normal, un Ã©vÃ¨nement valide rendra ce temps occupÃ©, mais il est possible de le configurer 
+en mode "Transparent", pour changer cette interprÃ©tation.
 
-Les propriétés classiques d'un composant VEVENT sont :
+Les propriÃ©tÃ©s classiques d'un composant VEVENT sont :
 
-DTSTART: Date de début de l'évènement 
-DTEND: Date de fin de l'évènement 
-SUMMARY: Titre de l'évènement 
-LOCATION: Lieu de l'évènement 
-CATEGORIES: Catégorie de l'évènement (ex: Conférence, Fête, ...) 
-STATUS: Statut de l'évènement (TENTATIVE, CONFIRMED, CANCELLED) 
-DESCRIPTION: Description de l'évènement 
-TRANSP: Définit si la ressource affectée à l'évenement est rendu indisponible (OPAQUE, TRANSPARENT)
+DTSTART: Date de dÃ©but de l'Ã©vÃ¨nement 
+DTEND: Date de fin de l'Ã©vÃ¨nement 
+SUMMARY: Titre de l'Ã©vÃ¨nement 
+LOCATION: Lieu de l'Ã©vÃ¨nement 
+CATEGORIES: CatÃ©gorie de l'Ã©vÃ¨nement (ex: ConfÃ©rence, FÃªte, ...) 
+STATUS: Statut de l'Ã©vÃ¨nement (TENTATIVE, CONFIRMED, CANCELLED) 
+DESCRIPTION: Description de l'Ã©vÃ¨nement 
+TRANSP: DÃ©finit si la ressource affectÃ©e Ã  l'Ã©venement est rendu indisponible (OPAQUE, TRANSPARENT)
 
-Les données vCalendar ont comme type-MIME text/calendar. L'extension ".vcs"
+Les donnÃ©es vCalendar ont comme type-MIME text/calendar. L'extension ".vcs"
 ***************************************************************************/
 
 
@@ -36,7 +36,7 @@ function escape($string) {
 	return str_replace(";","\;",$string);
 }
 
-// fonction pour encoder les caractères spéciaux et découper la ligne en tronçons de 76 caractéres
+// fonction pour encoder les caractÃ¨res spÃ©ciaux et dÃ©couper la ligne en tronÃ§ons de 76 caractÃ©res
 if(!function_exists('quoted_printable_encode')) {
 function quoted_printable_encode($input, $line_max = 76) {
 	$hex = array('0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F');
@@ -73,13 +73,13 @@ function quoted_printable_encode($input, $line_max = 76) {
 }
 
 /*Les lignes de texte NE DEVRAIENT PAS faire plus de 75 octets de long, le saut de ligne exclu. 
-Les longues lignes de contenu DEVRAIENT être découpées en une représentation sur plusieurs lignes 
-à l'aide d'une technique dite de à pliage � (folding) des lignes. C'est-à-dire la coupure d'une longue ligne
- entre deux caractères en insérant une séquence CRLF suivie immédiatement d'un seul caractère 
- blanc (whitespace) linéaire, à savoir un  ESPACE (code décimal 32 US-ASCII) 
- ou TABULATION HORIZONTALE (code décimal 9 US-ASCII). 
- Toute séquence CRLF suivie immédiatement d'un seul caractère blanc linéaire est ignorée (
- c'est-à-dire supprimée) au traitement du type de contenu.  */
+Les longues lignes de contenu DEVRAIENT Ãªtre dÃ©coupÃ©es en une reprÃ©sentation sur plusieurs lignes 
+Ã  l'aide d'une technique dite de Ã  pliage » (folding) des lignes. C'est-Ã -dire la coupure d'une longue ligne
+ entre deux caractÃ¨res en insÃ©rant une sÃ©quence CRLF suivie immÃ©diatement d'un seul caractÃ¨re 
+ blanc (whitespace) linÃ©aire, Ã  savoir un  ESPACE (code dÃ©cimal 32 US-ASCII) 
+ ou TABULATION HORIZONTALE (code dÃ©cimal 9 US-ASCII). 
+ Toute sÃ©quence CRLF suivie immÃ©diatement d'un seul caractÃ¨re blanc linÃ©aire est ignorÃ©e (
+ c'est-Ã -dire supprimÃ©e) au traitement du type de contenu.  */
 
  function ligne($input, $line_max = 75) {
    $output="";
@@ -93,7 +93,7 @@ Les longues lignes de contenu DEVRAIENT être découpées en une représentation
 }
 
 class vCalendar {
-	var $properties;    // tableau des propriétés d'un evenement
+	var $properties;    // tableau des propriÃ©tÃ©s d'un evenement
 	var $evenements = array();    // tableau des evevements
 	var $filename;      // le nom du fichier
 	var $encodage;      // le type d'encodage
@@ -116,7 +116,7 @@ class vCalendar {
             $this->filename = $name;
     }
 
-  // méthode pour ajouter une propriété
+  // mÃ©thode pour ajouter une propriÃ©tÃ©
   function setKey($key,$valeur,$type=""){
         if ($type!="") $key .= ";".$type;
         if ($this->encodage!="UTF8") {
@@ -129,7 +129,7 @@ class vCalendar {
              }
         }
 
- //méthode pour ajouter de début d'un évènement  DTSTART DTEND
+ //mÃ©thode pour ajouter de dÃ©but d'un Ã©vÃ¨nement  DTSTART DTEND
  function setDateTime($key,$datetime) {
 
 	list($date,$time) = explode(" ", $datetime);
@@ -139,7 +139,7 @@ class vCalendar {
  }
 
 
- // méthode pour créer un évènement
+ // mÃ©thode pour crÃ©er un Ã©vÃ¨nement
  function addEvenement($titre,$dtdeb,$dtfin,$lieu="",$description="",$categorie="",$priorite="1") {
          $this->setKey ("SUMMARY",$titre);
          $this->setDateTime("DTSTART",$dtdeb);
@@ -156,7 +156,7 @@ class vCalendar {
          array_push($this->evenements,$even);
  }
 
-	// méthode pour créer le contenu du fichier
+	// mÃ©thode pour crÃ©er le contenu du fichier
  function getvCalendar() {
 	$text = "BEGIN:VCALENDAR\r\n";
 	$text .= "PROID:-//PHP class//\r\n";
@@ -168,11 +168,11 @@ class vCalendar {
 	return $text;
  }
 
-	// méthode pour donner le nom du fichier
+	// mÃ©thode pour donner le nom du fichier
  function getFileName() {
         return $this->filename.$this->extension;
  }
-	// méthode pour donner le type mime
+	// mÃ©thode pour donner le type mime
  function getTypeName() {
        return "Content-Type: text/calendar; ";
  }
