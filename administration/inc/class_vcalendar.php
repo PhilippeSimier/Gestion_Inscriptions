@@ -3,21 +3,21 @@
 
 	PHP vCalendar class v2.0
 
-Cette classe permet de crÃ©er des fichiers textes au format vCalendar v1.0 ou 2.0
-pour transmettre des Ã©vÃ¨nements vers un agenda
+Cette classe permet de crÃéer des fichiers textes au format vCalendar v1.0 ou 2.0
+pour transmettre des évènements vers un agenda
 Auteur SIMIER Philippe philaure@wanadoo.fr
 
 si le constructeur recoit pour argument encodage le valeur quoted alors version 1.0
 avec l'encodage UTF8 se sera la version 2.0
-Un composant "VEVENT" offre un panel de propriÃ©tÃ©s qui dÃ©crivent un Ã©vÃ¨nement comme reprÃ©sentant une quantitÃ© de temps planifiÃ©e
-sur un calendrier. En temps normal, un Ã©vÃ¨nement valide rendra ce temps occupÃ©, mais il est possible de le configurer 
-en mode "Transparent", pour changer cette interprÃ©tation.
+Un composant "VEVENT" offre un panel de propriétés qui dÃ©crivent un évènement comme représentant une quantité de temps planifiée
+sur un calendrier. En temps normal, un évènement valide rendra ce temps occupé, mais il est possible de le configurer 
+en mode "Transparent", pour changer cette interpré©tation.
 
-Les propriÃ©tÃ©s classiques d'un composant VEVENT sont :
+Les propriétés classiques d'un composant VEVENT sont :
 
-DTSTART: Date de dÃ©but de l'Ã©vÃ¨nement 
-DTEND: Date de fin de l'Ã©vÃ¨nement 
-SUMMARY: Titre de l'Ã©vÃ¨nement 
+DTSTART: Date de début de l'évènement 
+DTEND: Date de fin de l'évènement 
+SUMMARY: Titre de l'évènement 
 LOCATION: Lieu de l'Ã©vÃ¨nement 
 CATEGORIES: CatÃ©gorie de l'Ã©vÃ¨nement (ex: ConfÃ©rence, FÃªte, ...) 
 STATUS: Statut de l'Ã©vÃ¨nement (TENTATIVE, CONFIRMED, CANCELLED) 
@@ -78,8 +78,8 @@ Les longues lignes de contenu DEVRAIENT Ãªtre dÃ©coupÃ©es en une reprÃ©s
  entre deux caractÃ¨res en insÃ©rant une sÃ©quence CRLF suivie immÃ©diatement d'un seul caractÃ¨re 
  blanc (whitespace) linÃ©aire, Ã  savoir un  ESPACE (code dÃ©cimal 32 US-ASCII) 
  ou TABULATION HORIZONTALE (code dÃ©cimal 9 US-ASCII). 
- Toute sÃ©quence CRLF suivie immÃ©diatement d'un seul caractÃ¨re blanc linÃ©aire est ignorÃ©e (
- c'est-Ã -dire supprimÃ©e) au traitement du type de contenu.  */
+ Toute sÃ©quence CRLF suivie immÃ©diatement d'un seul caractère blanc linéaire est ignorée (
+ c'est-à-dire supprimée) au traitement du type de contenu.  */
 
  function ligne($input, $line_max = 75) {
    $output="";
@@ -156,7 +156,7 @@ class vCalendar {
          array_push($this->evenements,$even);
  }
 
-	// mÃ©thode pour crÃ©er le contenu du fichier
+	// méthode pour créer le contenu du fichier
  function getvCalendar() {
 	$text = "BEGIN:VCALENDAR\r\n";
 	$text .= "PROID:-//PHP class//\r\n";
