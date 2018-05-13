@@ -71,32 +71,32 @@
 			<form method="post" action="<?php echo $_SERVER['SCRIPT_NAME'] ?>"  name="epreuve" onSubmit="return verif();">
 				<input type="hidden" name="mode" value="insertion" />
 				<input type="hidden" name="id_utilisateur" value="<?php echo $_SESSION['ID_user'] ?>" />
-				<table style="text-align: left; width: 600px; height: 160px;"   border="0" cellpadding="2" cellspacing="2">
+				<table>
 					<tbody>
 					<tr>
 						
 						<td>
-							<label for="nom">Libellé de la compétition : </label>
-							<input name="nom" class="normal" size="25" maxlength="25" required/>
+							<label for="nom">Libellé : </label>
+							<input name="nom" class="normal"  maxlength="25" required/>
 						</td>
 					</tr>
 					<tr>
 						
 						<td>
-							<label for="lieu">Lieu de la compétition : </label>
-							<input name="lieu" class="normal" size="25" maxlength="25" required/>
+							<label for="lieu">Lieu : </label>
+							<input name="lieu" class="normal"  maxlength="25" required/>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<label for="organisateur">Organisateur : </label>
-							<input name="organisateur" class="normal" size="25" maxlength="25" required/>
+							<input name="organisateur" class="normal"  maxlength="25" value="<?php echo $_SESSION['identite'] ?>" required/>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<label for="email">Email organisateur : </label>
-							<input type="email" name="email" class="normal" required/>
+							<input type="email" name="email" class="normal" value="<?php echo $_SESSION['email'] ?>" required/>
 						</td>
 					</tr>
 					<tr>
@@ -121,8 +121,8 @@
 						</td>
 					</tr>
 					<tr>
-						<td style="width: 50%; text-align: right;">
-						   <input name="envoyer" value="Valider"  type="submit" />
+						<td>
+						   <button name="envoyer" class="btn btn-primary" value="Valider"  type="submit" /> Valider</button>
 						</td>
 						
 					</tr>
