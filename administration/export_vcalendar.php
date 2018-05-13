@@ -1,11 +1,11 @@
 <?php
 //---------------------------------------------------------------------------------------
-//  ce script exporte les informations relatives � un evenement
+//  ce script exporte les informations relatives à un évènement
 //  dans un fichier au format vCard
 //---------------------------------------------------------------------------------------
-// v�rification des variables de session pour le temps d'inactivit� et de l'adresse IP
+// vérification des variables de session pour le temps d'inactivité et de l'adresse IP
 	include "authentification/authcheck.php" ;
-	// V�rification des droits pour cette page tous sauf les exclus
+	// Vérification des droits pour cette page tous sauf les exclus
 	if ($_SESSION['droits']<'2'){ 
 		header("Location: index.php");
 	};
@@ -15,7 +15,7 @@
 	// Classe vcard
 	include "inc/class_vcalendar.php" ;
 
-	// Connexion � la base pour rechercher les infos de l'utilisateur
+	// Connexion à la base pour rechercher les infos de l'utilisateur
     $bdd = new PDO('mysql:host=' . SERVEUR . ';dbname=' . BASE, UTILISATEUR,PASSE); 
 
 	// Lecture configuration  saison
@@ -27,8 +27,8 @@
     }
     // fin de la lecture configuration saison
 
-	//  requ�te SQL:
-	//  si l'id est absent alors toutes les comp�titions
+	//  requète SQL:
+	//  si l'id est absent alors toutes les compétitions
     if(isset($_GET['id'])) {
         $sql = sprintf('SELECT * FROM `competition` WHERE `id` = %s',
 			GetSQLValueString($_GET['id'], "int")
@@ -50,15 +50,15 @@
 	
 	
 	While ($competition = $stmt->fetchObject()){
-		// Ecriture d'un évènement vCalendar
+		// Ecriture d'un Ã©vÃ¨nement vCalendar
 		list($date,$time) = explode(" ", $competition->date);
 		// les infos sup dans la description
 		$info = "Organisateur : ".$competition->organisateur." \\n";
 		$info .= "Email : ".$competition->email." \\n";
-		$info .= "Licences autorisees : ";
+		$info .= "Licences autorisées : ";
 		if($competition->licence=="") $info .= "toutes"; else $info .= $competition->licence;
 
-		$e->addEvenement($competition->nom , $date." 090000" , $date." 170000", $competition->lieu, $info, "Competition Cross Route" ,1);
+		$e->addEvenement($competition->nom , $date." 090000" , $date." 170000", $competition->lieu, $info, "Compétition Cross Route" ,1);
 	}
     $output = $e->getvCalendar();
     $filename = $e->getFileName();
