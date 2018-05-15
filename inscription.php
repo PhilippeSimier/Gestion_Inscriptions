@@ -13,7 +13,7 @@
 // Février 2015 controle du sexe avec la table des prénoms
 // Février 2015 Ajout du champ GET compétition pour afficher uniquement celle demandée
 // 19 Février 2015 Ajout du n° de téléphone et attribution automatique du dossard
-// 04 Mai 2018 Adaptation PHP7 & HTML5
+// 04 Mai 2018 Adaptation PHP7 & HTML5 la page devient responsive
 //---------------------------------------------------------------------------------------------
 
 require_once('definitions.inc.php');
@@ -155,7 +155,7 @@ if( !empty($_POST['envoyer'])){
 	};		
 
 
-
+//--------------------s'il n'y a pas d'erreur--------------------------------------------------
 
  if (!$erreur){
       // voir module cotisation.php pour les prestations complémentaires et régles
@@ -278,65 +278,78 @@ $pdo = null;
 			//-->
 			</script>
 			
-			<div id="contenu" style="width:90%;" >
+			<div id="contenu" >
 				<h2>Inscription en ligne <?php echo SAISON ?></h2>
 				<?php if ($erreur) {echo '<p style="color:#FF0000;">'.$erreur."</p>"; } else { echo "<p> </p>"; }?>
 				
 				<div class="item" >
 					<p><b>Vos informations personnelles : </b><span id="loader" style="display:none;"><img src="images/loader.gif"  alt="loader" /></span></p>
 
-					<form method="post" action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" name="engagement" >
+					<form class="form-horizontal"method="post" action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" name="engagement" >
 
-						<table  border="0" cellpadding="2" cellspacing="2">
-							<tbody>
-								<tr>					
-									<td >
-										<label for="nolicence">Numéro de licence :</label>
-										<input type="text" class="normal" name="nolicence"  maxlength="10" onChange="licence_ffa(this)" value="<?php if (isset($_POST['nolicence'])) echo $_POST['nolicence']; ?>"/>
-									</td>
+						<div class="row">
+							<div class=" col-md-6">
+								<div class="form-group">
+								<label for="nolicence">Numéro de licence : </label>
+								<input type="text" class="normal" name="nolicence"  maxlength="10" onChange="licence_ffa(this)" value="<?php if (isset($_POST['nolicence'])) echo $_POST['nolicence']; ?>"/>
+								</div>
+							</div>
 									
-									<td>
-										<label for="noclub">Numéro de club :</label>
-										<input class="normal" name="noclub" onKeyPress="return pasCar(event)" maxlength="6"<?php if (isset($_POST['noclub'])) echo 'value="'.$_POST['noclub'].'" readonly="readonly"'; else echo ' value="" ';?>/>
-									</td>
-								</tr>
+							<div class=" col-md-6">
+								<div class="form-group">
+								<label for="noclub">Numéro de club : </label>
+								<input class="normal" name="noclub" onKeyPress="return pasCar(event)" maxlength="6"<?php if (isset($_POST['noclub'])) echo 'value="'.$_POST['noclub'].'" readonly="readonly"'; else echo ' value="" ';?>/>
+								</div>
+							</div>
+						</div>
 							  
-								<tr> 
-									<td>
-										<label for="nom">Nom :</label>
-										<input type="text" class="normal" name="nom" onKeyPress="return pasNum(event)" onChange="majuscule(this)"  maxlength="20" <?php if (isset($_POST['nom'])) echo 'value="'.$_POST['nom'].'" readonly="readonly"'; ?> required/>
-									</td>
-									<td>
-										<label for="prenom">Prénom :</label>
-										<input type="text" class="normal" name="prenom" onKeyPress="return pasNum(event)" onChange="majuscule(this)" maxlength="20" <?php if (isset($_POST['prenom'])) echo 'value="'.$_POST['prenom'].'" readonly="readonly"'; ?> required/>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label for="anneenaissance">Année de naissance :</label>
-										<input type="number" min="1920" class="normal" name="anneenaissance" size="4" maxlength="4" onKeyPress="return pasCar(event)" <?php if (isset($_POST['anneenaissance'])) echo 'value="'.$_POST['anneenaissance'].'" readonly="readonly"'; ?> required/>
-									</td>
-									<td>
-										<label for="sexe">Sexe :</label>
+						<div class="row">
+							<div class=" col-md-6">
+								<div class="form-group">
+								<label for="nom">Nom : </label>
+								<input type="text" class="normal" name="nom" onKeyPress="return pasNum(event)" onChange="majuscule(this)"  placeholder="Nom" <?php if (isset($_POST['nom'])) echo 'value="'.$_POST['nom'].'" readonly="readonly"'; ?> required/>
+								</div>
+							</div>
+							<div class=" col-md-6">		
+								<div class="form-group">
+								<label for="prenom">Prénom : </label>
+								<input type="text" class="normal" name="prenom" onKeyPress="return pasNum(event)" onChange="majuscule(this)" placeholder="Prénom" <?php if (isset($_POST['prenom'])) echo 'value="'.$_POST['prenom'].'" readonly="readonly"'; ?> required/>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class=" col-md-6">
+								<div class="form-group">
+								<label for="anneenaissance">Année de naissance : </label>
+								<input type="number" min="1920" class="normal" name="anneenaissance" size="4" maxlength="4" onKeyPress="return pasCar(event)" <?php if (isset($_POST['anneenaissance'])) echo 'value="'.$_POST['anneenaissance'].'" readonly="readonly"'; ?> required/>
+								</div>
+							</div>
+							<div class=" col-md-6">
+								<div class="form-group">
+										<label for="sexe">Sexe : </label>
 										<input type="radio"  name="sexe"  value="M" checked="checked" />Masculin
 										<input type="radio" <?php if (isset($_POST['sexe']) && $_POST['sexe']=='F')echo 'checked="checked"' ?> name="sexe" value="F"   />Féminin
-									</td>
-								</tr>
-							  
-								<tr>
-									<td>
-										<label for="email">Email :</label>
-										<input type="email" class="normal" name="email" id="email" maxlength="50" <?php if (isset($_POST['email'])) echo 'value="'.$_POST['email'].'"'; ?> required/>
-									</td>
-									<td>
-										<label for="tel">Tel :</label>
-										<input type="tel" class="normal" name="tel" id="tel" maxlength="10"  <?php if (isset($_POST['tel'])) echo 'value="'.$_POST['tel'].'"'; ?> required/>
-									</td>
-								</tr>
-							  
-								<tr>	
-									<td>
-										<label for="competition">Vous souhaitez vous inscrire : </label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class=" col-md-6">							  
+								<div class="form-group">
+								<label for="email">Email : </label>
+								<input type="email" class="normal" name="email" id="email" placeholder="Email" <?php if (isset($_POST['email'])) echo 'value="'.$_POST['email'].'"'; ?> required/>
+								</div>
+							</div>
+							<div class=" col-md-6">
+								<div class="form-group">
+								<label for="tel">Tel : </label>
+								<input type="tel" class="normal" name="tel" id="tel" placeholder="00 00 00 00 00"  <?php if (isset($_POST['tel'])) echo 'value="'.$_POST['tel'].'"'; ?> required/>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class=" col-md-6">							  	  
+								<div class="form-group">
+								<label for="competition">Vous souhaitez vous inscrire : </label>
 										<?php 
 
 										if ((isset($_GET['competition']) == false) && (isset($_POST['competition']) == false)){
@@ -373,9 +386,11 @@ $pdo = null;
 											}
 										}
 										?>
-									</td>
-									<td id="epreuve">
-										<label for="id_epreuve">choisissez : </label>
+							</div>
+							</div>
+							<div class=" col-md-6" id="epreuve">
+								<div class="form-group">
+								<label for="id_epreuve">choisissez : </label>
 										<?php 
 											echo '<select name="id_epreuve">';
 											if ( !isset($_GET['competition']) && !isset($_POST['competition']))
@@ -405,28 +420,31 @@ $pdo = null;
 													// fin de la lecture des epreuves	
 											}
 											echo '</select>';
-										?>	
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
+										?>
+								</div>				
+							</div>
+						</div>
+						<div class="row">
+							<div class=" col-md-12">
+									
 										<br />Pour pouvoir valider votre inscription, vous devez accepter le règlement suivant :
 										<br />En cochant la case, vous reconnaissez avoir lu et accepté le règlement de cette épreuve
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
+							</div>
+						</div>
+						<div class="row">
+							<div class=" col-md-12">
 										<input type="checkbox" name="reglement" > <b>Règlement de la compétition</b>
 										<a href="reglement.php" target="_blank"> (réglement)</a>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" style=" width:28%;"><input value="Valider" name="envoyer" type="submit" onclick="alertNotNeeded()"/>
-									</td>
+							</div>
+						</div>
+						<div class="row">
+							<div class=" col-md-12">
+								<button type="submit" class="btn btn-primary" value="Valider" name="envoyer" onclick="alertNotNeeded()" > Valider</button>
+									
+							</div>
 							  
-								</tr>
-							</tbody>
-						</table>
+						</div>
+
 					
 					</form>
 					

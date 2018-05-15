@@ -65,7 +65,7 @@
 	<div id="contenu">
 		<h2><a href="competition.php"><img src="../images/fleche_retour.png" title="Retour" border="0" width="44" height="41"></a>Nouvelle Compétition pour : <?php echo DESIGNATION ; ?> </h2>
 		<?php if ($erreur) {echo '<p style="color:#FF0000;">'.$erreur."</p>"; } else { echo "<p> </p>"; }?>
-		<div class="item">
+		<div class="jumbotron">
 
 			<p style="font-weight:bold;">informations sur la compétition : </p>
 			<form method="post" action="<?php echo $_SERVER['SCRIPT_NAME'] ?>"  name="epreuve" onSubmit="return verif();">
@@ -77,32 +77,32 @@
 						
 						<td>
 							<label for="nom">Libellé : </label>
-							<input name="nom" class="normal"  maxlength="25" required/>
+							<input name="nom" class="normal"   required/>
 						</td>
 					</tr>
 					<tr>
 						
 						<td>
 							<label for="lieu">Lieu : </label>
-							<input name="lieu" class="normal"  maxlength="25" required/>
+							<input name="lieu" class="normal"   required/>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<label for="organisateur">Organisateur : </label>
-							<input name="organisateur" class="normal"  maxlength="25" value="<?php echo $_SESSION['identite'] ?>" required/>
+							<input name="organisateur" class="normal"   value="<?php echo $_SESSION['identite'] ?>" required/>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<label for="email">Email organisateur : </label>
+							<label for="email">Email : </label>
 							<input type="email" name="email" class="normal" value="<?php echo $_SESSION['email'] ?>" required/>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<label for="date">Date : </label>
-							<input type="date" name="date" class="date" size="10" required/>
+							<input type="date" name="date" class="date"  required/>
 						</td>
 					</tr>
 					<tr>

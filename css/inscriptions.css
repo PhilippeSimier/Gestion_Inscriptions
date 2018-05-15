@@ -118,17 +118,16 @@ Text-Align: left;
 
 div.item {
         font-family:"Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
-        font-size:10pt;
+        font-size:12pt;
         color: #000000;
         border-radius: .3rem;
         background-color:#F0F0F0;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 6px;
-        padding-bottom: 6px;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
         margin-top: 10px;
         margin-bottom: 10px;
-        overflow: auto;
 }
 
 div.item img {
@@ -211,12 +210,15 @@ div#auth {
 	border:1px solid #999999;
 	border-radius: 5px;
 	color: black;
+	
+	
 }
 .normal {	/***pour les formulaires retour à l'état normal après l'utilisation ***/
 	background: white;
 	border:1px solid #999999;
 	border-radius: 5px;
 	color: black;
+	
 
 }
 .erreur { /***champ formulaire en erreur***/
