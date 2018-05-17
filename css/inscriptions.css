@@ -25,18 +25,11 @@ body {
 		text-align: left;
  }
 
-
-
-/* le contenu  */
+/* la div id contenu  */
 #contenu {
-/*    margin-left: 30px;
-    margin-right: 30px;  */
     margin-top: 5px;
     min-height: 400px;
  }
-
-
-
 
 #pied {
 
@@ -107,7 +100,7 @@ margin-left:60px
 
 /* Definition des cellules de tableaux  couleur blanc */
 
-UL, OL, TR, TD, TH
+tr, td, th
 {
 Color: #000000 ;
 font-family:"Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
@@ -115,6 +108,10 @@ font-size: 10pt;
 font-style: normal;
 Text-Align: left;
 }
+
+ul{
+	padding-left: 0px;
+}	
 
 div.item {
         font-family:"Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;

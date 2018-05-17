@@ -4,22 +4,30 @@
 ?>	
 		
      
-			<div id="contenu" style="width: 1024px; min-height:500px;">
-				<h2>Un simple clic pour vérifier l'état de votre inscription !</h2>
-				<div class="item" style="margin-left:0;">
-					<div style="float: left; font-size:12pt; padding: 20px; "> 
+			<div id="contenu" style="min-height:500px;">
+				<h2>Un simple clic <small>pour vérifier l'état de votre inscription !</small></h2>
+				<div class="row">
+					<div class=" col-md-6"> 
 						Nom (ou début du nom)  ou % pour obtenir la liste complète
 					</div>
-					<div id="rechercher" style="padding: 20px;">
+					<div class=" col-md-6">
 						<form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="POST" name="verification">
-							<input  name="nom"  value="Rechercher" style="" size="10" onClick="this.value='';" />
-							<input  class= "bouton" type="submit"  value="_" name="envoyer" />
+							<input  class="normal" name="nom"  placeholder="Nom"  required />
+							<button  class="btn btn-info" type="submit">
+								<span class="glyphicon glyphicon-search"></span> Rechercher
+							</button>
+							
 						</form>
 					</div>
 				</div>
+				<div class="row">
+				 <p> </p>
+				</div>
+				
 			
 			<?php
             if (isset($_POST['nom'])&&($_POST['nom']!="")) {
+				
 				require_once('definitions.inc.php');
 				// connexion à la base
 				$bdd = new PDO('mysql:host=' . SERVEUR . ';dbname=' . BASE, UTILISATEUR,PASSE);
@@ -29,12 +37,10 @@
                   . "WHERE cross_route_engagement.competition = competition.nom";
 				$sql .= " AND cross_route_engagement.nom LIKE '".$_POST['nom']."%'";
 
-
-
 				$stmt = $bdd->query($sql);
 				$trouve=false;
 
-				echo '<table id="tableau" style="margin:5px;">';
+				echo '<div class="table-responsive"><table class="table table-striped table-condensed">';
 				echo "<tr><th>Dossard</th><th>N° licence</th><th>Nom</th><th>Prénom</th><th>Catégorie</th><th>Course</th><th>Date</th><th>Etat</th></tr>";
 				while ($engagement = $stmt->fetchObject()){
 
@@ -56,8 +62,8 @@
                         }
 					$trouve=true;
 				}
-				echo "</td></tr></table>";
-				if (!$trouve) echo "<p>pas d'engagement pour ce nom !</p>";
+				echo "</td></tr></table></div>";
+				if (!$trouve) echo "<p>Aucun engagement pour ".$_POST['nom']. " !</p>";
                                     	
 			}
 			?>
