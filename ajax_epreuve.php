@@ -15,7 +15,8 @@
     // ouverture connexion à la base
     $bdd = new PDO('mysql:host=' . SERVEUR . ';dbname=' . BASE, UTILISATEUR,PASSE);
    
-    $reponse = '<select name="id_epreuve"><option selected="selected" value="">Choisissez l\'épreuve</option>';
+	$reponse = '<label for="id_epreuve">Epreuve : </label>';
+    $reponse .= '<select name="id_epreuve" class="form-control"><option selected="selected" value="">Choisissez l\'épreuve</option>';
     // course pour les femmes
     $sql = sprintf ("SELECT * FROM cross_route_epreuve WHERE `competition`=%s AND `sexe_autorise`='F' ORDER BY `horaire`",
     GetSQLValueString($_POST['competition'], "text")

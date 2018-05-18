@@ -341,7 +341,7 @@ $pdo = null;
 							</div>
 							<div class=" col-md-6">
 								<div class="form-group">
-								<label for="tel">Tel : </label>
+								<label for="tel">Téléphone : </label>
 								<input type="tel" class="normal" name="tel" id="tel" placeholder="00 00 00 00 00"  <?php if (isset($_POST['tel'])) echo 'value="'.$_POST['tel'].'"'; ?> required/>
 								</div>
 							</div>
@@ -349,12 +349,12 @@ $pdo = null;
 						<div class="row">
 							<div class=" col-md-6">							  	  
 								<div class="form-group">
-								<label for="competition">Vous souhaitez vous inscrire : </label>
+								<label for="competition">Compétition : </label>
 										<?php 
 
 										if ((isset($_GET['competition']) == false) && (isset($_POST['competition']) == false)){
-											echo '<select name="competition" id="competition">';
-											echo '<option selected="selected" value="">Choisissez l\'évènement\'</option>';
+											echo '<select name="competition" id="competition" class="form-control" >';
+											echo '<option selected="selected" value="">Choisissez la compétition</option>';
 											// connexion à la base de données BASE
 											$bdd = new PDO('mysql:host=' . SERVEUR . ';dbname=' . BASE, UTILISATEUR,PASSE);
 											// Lecture de la table competition pour obtenir libellés et dates  de toutes les compétitions validées
@@ -386,16 +386,16 @@ $pdo = null;
 											}
 										}
 										?>
-							</div>
+								</div>
 							</div>
 							<div class=" col-md-6" id="epreuve">
 								<div class="form-group">
-								<label for="id_epreuve">choisissez : </label>
+								<label for="id_epreuve">Epreuve : </label>
 										<?php 
-											echo '<select name="id_epreuve">';
+											echo '<select name="id_epreuve" class="form-control">';
 											if ( !isset($_GET['competition']) && !isset($_POST['competition']))
 											{
-											  echo '<option selected="selected" value="">Choisissez l\'option</option>';
+											  echo '<option selected="selected" value="">Choisissez l\'épreuve</option>';
 											}
 											else
 											{
