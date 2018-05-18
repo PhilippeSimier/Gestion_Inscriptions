@@ -35,9 +35,9 @@ require_once('administration/utile_sql.php');
 // ------------si les inscriptions sont fermées affichage de la page close.php---------------------------
 	if (isset($_GET['competition']) === false){
 		// Lecture de la table competition pour obtenir  toutes les compétitions ouvertes à l'inscription
-            
+
 		$stmt = $bdd->query("SELECT * FROM `competition` WHERE  `validation`='1'");
-		if ($stmt->fetchColumn()==false) { 
+		if ($stmt->fetchColumn()==false) {
 			header("Location: close.php");
 			$bdd = NULL;
 			exit;
@@ -46,13 +46,13 @@ require_once('administration/utile_sql.php');
 	else
 	{	$sql = "SELECT * FROM `competition` WHERE `nom`= \"".$_GET['competition']."\" and `validation`=1";
 		$stmt = $bdd->query($sql);
-		if ($stmt->fetchColumn()==false) { 
+		if ($stmt->fetchColumn()==false) {
 			header("Location: close.php");
 			$bdd = NULL;
 			exit;
 			};
 	}
-	if (EN_FFA==FALSE) { 
+	if (EN_FFA==FALSE) {
 		header("Location: close.php");
 		exit;
 		};
@@ -60,41 +60,41 @@ require_once('administration/utile_sql.php');
 //--------------------si des données  sont reçues---------------------------------------------------------
 if( !empty($_POST['envoyer'])){
 
-    if (empty($_POST['reglement'])) {  
+    if (empty($_POST['reglement'])) {
 		$erreur = "Vous devez avoir lu et accepté le règlement pour cette compétition !";
     };
-	
-    if ($_POST['nom']=="") { 
+
+    if ($_POST['nom']=="") {
 		$erreur = "Vous devez indiquer votre nom !";
     };
-	
+
 	// Contrôle du champ email
-	if ($_POST['email']=="") { 
+    if ($_POST['email']=="") {
 		$erreur = "Oups vous devez indiquer votre email !";
     }
-	else { 
+    else {
 		if ( !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 			$erreur = "Votre email n'est pas valide !!!";
-		}	
+		}
 	};
 
-    if ($_POST['noclub']=="") { 
-		$club = new stdClass();  // création d'un club vide pour les non licenciés
-	    $club->noclub = "";
-		$club->ligue = "";
-		$club->nom = "";
+    if ($_POST['noclub']=="") {
+	$club = new stdClass();  // création d'un club vide pour les non licenciés
+	$club->noclub = "";
+	$club->ligue = "";
+	$club->nom = "";
     }
     else {
         $sql = "SELECT * FROM `ffa_club` WHERE `noclub`=" . $_POST['noclub'];
        	$stmt = $bdd->query($sql);
        	$club = $stmt->fetchObject();
     };
-	
-	// Création d'un objet epreuve
-	$sql = "SELECT * FROM `cross_route_epreuve` WHERE `id_epreuve`= " . $_POST['id_epreuve']; 
-	$stmt = $bdd->query($sql);
-	$epreuve = $stmt->fetchObject();
-	
+
+    // Création d'un objet epreuve
+    $sql = "SELECT * FROM `cross_route_epreuve` WHERE `id_epreuve`= " . $_POST['id_epreuve']; 
+    $stmt = $bdd->query($sql);
+    $epreuve = $stmt->fetchObject();
+
     // Contrôle de la catégorie pour l'épreuve
     $cat = cat_ffa($_POST['anneenaissance'],$_POST['sexe']);
 	if (!test_cat($_POST['anneenaissance'],$epreuve->categorie_autorise,$_POST['sexe'])) {
@@ -104,14 +104,14 @@ if( !empty($_POST['envoyer'])){
 	// Contrôle du sexe autorisé pour l'épreuve
 
     $sexe_autorises= explode(",",$epreuve->sexe_autorise);
-	 
+
     if  (!in_array($_POST['sexe'], $sexe_autorises)) {
         if ($_POST['sexe']=='M') { $genre='Hommes';  $accord='s'; }
         else { $genre='Femmes'; $accord='es';}
         $erreur = "Oups, les ".$genre." ne sont pas autorisé".$accord." pour cette épreuve !";
     }
-     
-    // Création de l'objet licencie 
+
+    // Création de l'objet licencie
 	if ($_POST['nolicence']) {
 		$sql = sprintf("SELECT typelicence FROM  `ffa_licence` WHERE `nolicence`=%s",
            GetSQLValueString($_POST['nolicence'], "int")
@@ -120,14 +120,14 @@ if( !empty($_POST['envoyer'])){
 		$stmt = $bdd->query($sql);
         //$licencie =  mysql_fetch_object ($reponse);
 		$licencie = $stmt->fetchObject();
-	} 
+	}
 	else{
 		$licencie = new stdClass();  // création d'une licence vide pour les non licenciés
 		$licencie->typelicence = "";
-	}	
-	 
+	}
+
     // Contrôle du type de licence pour les compétitions uniquement autorisées au type COMP
-     
+
 		$sql = sprintf("SELECT licence FROM  `competition` WHERE `nom`=%s",
               GetSQLValueString($_POST['competition'], "text")
         );
@@ -141,18 +141,18 @@ if( !empty($_POST['envoyer'])){
 
         }
     }
- 
+
 	// controle du sexe avec la table des prénoms
 		$prenom = new stdClass();
 		$prenom->genre = " ";
 		$sql = "SELECT * FROM `prenom` WHERE `prenom` = '".$_POST['prenom']."'";
 		$stmt = $bdd->query($sql);
 		$prenom = $stmt->fetchObject();
-	
+
 	if (($_POST['sexe']=='M' && $prenom->genre == 'f')||($_POST['sexe'] == 'F' && $prenom->genre == 'm')) {
 		$erreur = "Oups, " . $_POST['prenom'] . " est " . get_genre($prenom->genre);
-		
-	};		
+
+	};
 
 
 //--------------------s'il n'y a pas d'erreur--------------------------------------------------
@@ -166,7 +166,7 @@ if( !empty($_POST['envoyer'])){
     // si n° de licence est vide alors c'est un non licencié
     if ($_POST['nolicence']=='') $cas='0'; else $cas='1';
     if ($_POST['nolicence']=='') $certif='non'; else $certif='oui';
-	
+
 	// recherche du dernier n° de dossard attribué pour cette épreuve
 	$sql = "SELECT MAX(`dossard`) AS high_dossard FROM cross_route_engagement WHERE `id_epreuve`= " . $_POST['id_epreuve'];
 	$stmt = $bdd->query($sql);
@@ -197,8 +197,8 @@ if( !empty($_POST['envoyer'])){
 
               //$Result1 = mysql_query($insertSQL);
 			  $stmt = $bdd->query($insertSQL);
-			  
-			  
+
+
               if ($stmt) {
               // retour vers la page de confirmation evec cas=1 licencié challenge ffa
               $GoTo = "confirmation.php?nom=".$_POST['nom']."&prenom=".$_POST['prenom']."&sexe=".$_POST['sexe']."&cas=".$cas."&info=".$commentaire."&gratuit=".$gratuit;
@@ -206,15 +206,15 @@ if( !empty($_POST['envoyer'])){
               }
               else {
                 $erreur = $bdd->errorInfo();
-				
+
                 if ($_POST['sexe']=='M') $accord =''; else $accord='e';
                 if (substr($erreur[2],0,8)=="Duplicat") { $erreur = " Oups, Vous êtes déja inscrit".$accord." pour cette course !"; }
               }
      }
-	 
+ 
 }
 //------------------------------------------------------------------------------------------------------------
-$pdo = null; 
+$pdo = null;
 
 // fonction pour déterminer la catégorie FFA
   function cat_ffa($annee,$sexe){
@@ -277,11 +277,11 @@ $pdo = null;
 				alertNeeded();
 			//-->
 			</script>
-			
+
 			<div id="contenu" >
 				<h2>Inscription en ligne <?php echo SAISON ?></h2>
 				<?php if ($erreur) {echo '<p style="color:#FF0000;">'.$erreur."</p>"; } else { echo "<p> </p>"; }?>
-				
+
 				<div class="item" >
 					<p><b>Vos informations personnelles : </b><span id="loader" style="display:none;"><img src="images/loader.gif"  alt="loader" /></span></p>
 
@@ -294,7 +294,7 @@ $pdo = null;
 								<input type="text" class="normal" name="nolicence"  maxlength="10" onChange="licence_ffa(this)" value="<?php if (isset($_POST['nolicence'])) echo $_POST['nolicence']; ?>"/>
 								</div>
 							</div>
-									
+
 							<div class=" col-md-6">
 								<div class="form-group">
 								<label for="noclub">Numéro de club : </label>
@@ -302,7 +302,7 @@ $pdo = null;
 								</div>
 							</div>
 						</div>
-							  
+
 						<div class="row">
 							<div class=" col-md-6">
 								<div class="form-group">
@@ -310,7 +310,7 @@ $pdo = null;
 								<input type="text" class="normal" name="nom" onKeyPress="return pasNum(event)" onChange="majuscule(this)"  placeholder="Nom" <?php if (isset($_POST['nom'])) echo 'value="'.$_POST['nom'].'" readonly="readonly"'; ?> required/>
 								</div>
 							</div>
-							<div class=" col-md-6">		
+							<div class=" col-md-6">
 								<div class="form-group">
 								<label for="prenom">Prénom : </label>
 								<input type="text" class="normal" name="prenom" onKeyPress="return pasNum(event)" onChange="majuscule(this)" placeholder="Prénom" <?php if (isset($_POST['prenom'])) echo 'value="'.$_POST['prenom'].'" readonly="readonly"'; ?> required/>
@@ -333,7 +333,7 @@ $pdo = null;
 							</div>
 						</div>
 						<div class="row">
-							<div class=" col-md-6">							  
+							<div class=" col-md-6">
 								<div class="form-group">
 								<label for="email">Email : </label>
 								<input type="email" class="normal" name="email" id="email" placeholder="Email" <?php if (isset($_POST['email'])) echo 'value="'.$_POST['email'].'"'; ?> required/>
@@ -347,10 +347,10 @@ $pdo = null;
 							</div>
 						</div>
 						<div class="row">
-							<div class=" col-md-6">							  	  
+							<div class=" col-md-6">
 								<div class="form-group">
 								<label for="competition">Compétition : </label>
-										<?php 
+										<?php
 
 										if ((isset($_GET['competition']) == false) && (isset($_POST['competition']) == false)){
 											echo '<select name="competition" id="competition" class="form-control" >';
@@ -358,22 +358,21 @@ $pdo = null;
 											// connexion à la base de données BASE
 											$bdd = new PDO('mysql:host=' . SERVEUR . ';dbname=' . BASE, UTILISATEUR,PASSE);
 											// Lecture de la table competition pour obtenir libellés et dates  de toutes les compétitions validées
-									
+
 											$sql = "SELECT * FROM `competition` WHERE  `validation`='1'";
 											$stmt = $bdd->query($sql);
 											//if ((stmt->rowCount())==0) echo "<optgroup label=\"Aucun évènement disponible\">";
 											//if ((stmt->rowCount())==1) echo "<optgroup label=\"évènement disponible\">";
 											//if ((stmt->rowCount())>1) echo "<optgroup label=\"évènements disponibles\">";
 											while ($competition = $stmt->fetchObject()){
-												echo '<option value="'.$competition->nom.'">'.$competition->nom.' ('.date("j M Y",strtotime($competition->date)).')</option>';
+												echo '<option value="' . $competition->id . '">'.$competition->nom.' ('.date("j M Y",strtotime($competition->date)).')</option>';
 											}
-													
-									
+
 											// fin de la lecture des competitions
-								   
+
 											echo '</optgroup>';
 											echo '</select>';
-										}	
+										}
 										else
 										{
 											if (!empty($_GET['competition'])){
@@ -388,11 +387,11 @@ $pdo = null;
 										?>
 								</div>
 							</div>
-							<div class=" col-md-6" id="epreuve">
+							<div class=" col-md-6">
 								<div class="form-group">
 								<label for="id_epreuve">Epreuve : </label>
 										<?php 
-											echo '<select name="id_epreuve" class="form-control">';
+											echo '<select name="id_epreuve" class="form-control" id="id_epreuve">';
 											if ( !isset($_GET['competition']) && !isset($_POST['competition']))
 											{
 											  echo '<option selected="selected" value="">Choisissez l\'épreuve</option>';

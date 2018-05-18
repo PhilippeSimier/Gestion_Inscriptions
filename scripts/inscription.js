@@ -1,7 +1,7 @@
 			// avec jQuery
 			// Quand le dom est chargé
 			$(function(){
-			   //  à l'évènement "change" de l'élément id competition, on associe la fonction epreuve  .
+			   //  à l'évènement "change" de l'élément id competition, on associe la fonction load_epreuve  .
 			   $("#competition").change(function(){
 				   load_epreuve(this.value);
 				});
@@ -24,8 +24,9 @@
 				$("#loader").show();   // affiche le loader
 				$.post("ajax_epreuve.php", { competition: code },
 					function(code_html){
-						$("#loader").hide();   //cache le loader
-						$("#epreuve").html(code_html);  // ajoute dans l'élément id épreuve le contenu html reçu
+						$("#loader").hide();   //cache le loader 
+						console.log("code html" + code_html);
+						$("#id_epreuve").html(code_html);  // ajoute dans l'élément id épreuve le contenu html reçu
 					}
 				);
 			}
